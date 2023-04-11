@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity 0.8.19;
 
 ///////////////////////////////////////////////////////////////////////
 // Based on @openzeppelin/contracts@4.8.2/token/ERC20/ERC20.sol      //
@@ -725,6 +725,10 @@ contract NESSToken is ERC20, ERC20Burnable, Pausable, Ownable {
 
     function unpause() public onlyOwner {
         _unpause();
+    }
+
+    function renounceOwnership() public whenNotPaused onlyOwner override {
+        super.renounceOwnership();
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)
